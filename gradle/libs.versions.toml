@@ -24,6 +24,7 @@ dateTime = "0.9.0"
 messageBarCompose = "1.0.8"
 oneTapCompose = "1.0.13"
 desugarSDK = "2.0.4"
+uiTextGoogleFonts = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,6 +72,7 @@ message-bar-compose = { group = "com.github.stevdza-san", name = "MessageBarComp
 one-tap-compose = { group = "com.github.stevdza-san", name = "OneTapCompose", version.ref = "oneTapCompose" }
 
 desugar-sdk = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarSDK" }
+androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
