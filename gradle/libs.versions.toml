@@ -1,13 +1,29 @@
 [versions]
 agp = "8.5.1"
-kotlin = "1.9.0"
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
-composeBom = "2024.04.01"
+composeBom = "2024.06.00"
+
+realm = "2.1.0"
+ksp = "2.0.0-1.0.23"
+hilt = "2.51.1"
+hiilNavigationCompose = "1.2.0"
+navigationCompose = "2.7.7"
+firebaseBom = "33.1.2"
+room = "2.6.1"
+lifecycleRuntimeCompose = "2.8.4"
+splashScreen = "1.0.1"
+kotlinx = "1.6.0-native-mt"
+coilCompose = "2.7.0"
+dateTime = "0.9.0"
+messageBarCompose = "1.0.8"
+oneTapCompose = "1.0.13"
+desugarSDK = "2.0.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,7 +41,42 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiilNavigationCompose" }
+
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+
+core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx" }
+library-sync = { group = "io.realm.kotlin", name = "library-sync", version.ref = "realm" }
+
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
+
+date-time = { group = "io.github.vanpra.compose-material-dialogs", name = "core", version.ref = "dateTime" }
+
+message-bar-compose = { group = "com.github.stevdza-san", name = "MessageBarCompose", version.ref = "messageBarCompose" }
+
+one-tap-compose = { group = "com.github.stevdza-san", name = "OneTapCompose", version.ref = "oneTapCompose" }
+
+desugar-sdk = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarSDK" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+io-realm-kotlin = { id = "io.realm.kotlin", version.ref = "realm" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

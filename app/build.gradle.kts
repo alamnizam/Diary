@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.io.realm.kotlin)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -39,9 +43,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -66,4 +68,47 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    //Compose Navigation
+    implementation(libs.navigation.compose)
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.storage)
+
+    //Room components
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    //Runtime Compose
+    implementation(libs.lifecycle.runtime.compose)
+
+    //SplashScreen API
+    implementation(libs.core.splashscreen)
+
+    //MongoDB realm
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.library.sync)
+
+    //Coil
+    implementation(libs.coil.compose)
+
+    //DateTime
+    implementation(libs.date.time)
+
+    //Message Bar
+    implementation(libs.message.bar.compose)
+
+    //One Tap
+    implementation(libs.one.tap.compose)
+
+    //Desugar
+    coreLibraryDesugaring(libs.desugar.sdk)
 }
