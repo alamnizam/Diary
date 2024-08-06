@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.codeturtle.diary.presentation.screens.auth.AuthenticationScreen
 import com.codeturtle.diary.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 
 @Composable
@@ -18,14 +19,18 @@ fun SetupNavGraph(
         startDestination = startDestination,
         navController = navController
     ){
-        authenticaionRoute()
+        authenticationRoute()
         homeRoute()
         writeRoute()
     }
 }
 
-fun NavGraphBuilder.authenticaionRoute(){
+fun NavGraphBuilder.authenticationRoute(){
     composable(route = Screen.Authentication.route){
+        AuthenticationScreen(
+            loadingState = false,
+            onButtonClicked = {}
+        )
     }
 }
 
