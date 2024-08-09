@@ -3,21 +3,42 @@ package com.codeturtle.diary.presentation.screens.auth
 import android.annotation.SuppressLint
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.codeturtle.diary.naviagtion.Screen
+import com.codeturtle.diary.util.Constants.CLIENT_ID
+import com.stevdzasan.messagebar.ContentWithMessageBar
+import com.stevdzasan.messagebar.MessageBarState
+import com.stevdzasan.onetap.OneTapSignInState
+import com.stevdzasan.onetap.OneTapSignInWithGoogle
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AuthenticationScreen(
     loadingState: Boolean,
-    onButtonClicked: () -> Unit
+    oneTapState: OneTapSignInState,
+    messageBarState: MessageBarState,
+    onButtonClicked: () -> Unit,
+    onTokenIdReceived: (String) -> Unit,
+    onDialogDismissed: (String) -> Unit
 ) {
     Scaffold(
         content = {
-            AuthenticationContent(
-                loadingState = loadingState,
-                onButtonClicked = onButtonClicked
-            )
+            ContentWithMessageBar(messageBarState = messageBarState) {
+                AuthenticationContent(
+                    loadingState = loadingState,
+                    onButtonClicked = onButtonClicked
+                )
+            }
+        }
+    )
+
+    OneTapSignInWithGoogle(
+        state = oneTapState,
+        clientId = CLIENT_ID,
+        onTokenIdReceived = { tokenID->
+            onTokenIdReceived(tokenID)
+        },
+        onDialogDismissed = { message->
+            onDialogDismissed(message)
+            messageBarState.addError(Exception(message))
         }
     )
     
