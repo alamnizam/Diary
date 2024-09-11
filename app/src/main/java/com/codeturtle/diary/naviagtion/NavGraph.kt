@@ -30,24 +30,33 @@ import kotlinx.coroutines.launch
 fun SetupNavGraph(
     startDestination: String,
     navController: NavHostController
-){
+) {
     NavHost(
         startDestination = startDestination,
         navController = navController
-    ){
-        authenticationRoute()
+    ) {
+        authenticationRoute(
+            navigateToHome = {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+            }
+        )
         homeRoute()
         writeRoute()
     }
 }
 
-fun NavGraphBuilder.authenticationRoute(){
-    composable(route = Screen.Authentication.route){
-        val viewModel : AuthenticationViewModel = viewModel()
+fun NavGraphBuilder.authenticationRoute(
+    navigateToHome: () -> Unit
+) {
+    composable(route = Screen.Authentication.route) {
+        val viewModel: AuthenticationViewModel = viewModel()
+        val authenticated by viewModel.authenticated
         val loadingState by viewModel.loadingState
         val oneTapState = rememberOneTapSignInState()
         val messageBarState = rememberMessageBarState()
         AuthenticationScreen(
+            authenticated = authenticated,
             loadingState = loadingState,
             oneTapState = oneTapState,
             messageBarState = messageBarState,
@@ -55,14 +64,12 @@ fun NavGraphBuilder.authenticationRoute(){
                 oneTapState.open()
                 viewModel.setLoading(true)
             },
-            onTokenIdReceived = { tokenId->
+            onTokenIdReceived = { tokenId ->
                 viewModel.signInWithMongoAtlas(
                     tokenId = tokenId,
                     onSuccess = {
-                        if (it){
-                            messageBarState.addSuccess("Successfully Authenticated!")
-                            viewModel.setLoading(false)
-                        }
+                        messageBarState.addSuccess("Successfully Authenticated!")
+                        viewModel.setLoading(false)
                     },
                     onError = {
                         messageBarState.addError(it)
@@ -73,13 +80,14 @@ fun NavGraphBuilder.authenticationRoute(){
             onDialogDismissed = {
                 messageBarState.addError(Exception(it))
                 viewModel.setLoading(false)
-            }
+            },
+            navigateToHome = navigateToHome
         )
     }
 }
 
-fun NavGraphBuilder.homeRoute(){
-    composable(route = Screen.Home.route){
+fun NavGraphBuilder.homeRoute() {
+    composable(route = Screen.Home.route) {
         val scope = rememberCoroutineScope()
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -97,15 +105,15 @@ fun NavGraphBuilder.homeRoute(){
     }
 }
 
-fun NavGraphBuilder.writeRoute(){
+fun NavGraphBuilder.writeRoute() {
     composable(
         route = Screen.Write.route,
-        arguments = listOf(navArgument(name = WRITE_SCREEN_ARGUMENT_KEY){
+        arguments = listOf(navArgument(name = WRITE_SCREEN_ARGUMENT_KEY) {
             type = NavType.StringType
             nullable = true
             defaultValue = null
         })
-    ){
+    ) {
 
     }
 }
